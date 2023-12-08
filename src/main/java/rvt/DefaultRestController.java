@@ -14,9 +14,9 @@ public class DefaultRestController {
     String getAllStudents() {
         Student student = 
         new Student("Jānis",
-        "Smith",
-        "j@s.lv",
-        "DP2-1");
+        "Saulītis",
+        "janis.saulitis@mail.com",
+        "DP2-3");
 
 
         ObjectMapper objectMapper = new ObjectMapper();

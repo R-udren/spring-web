@@ -1,0 +1,46 @@
+/* Reset some default styles of the browser */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    color: #333333;
+    line-height: 1.6; /* Improve readability */
+    -webkit-font-smoothing: antialiased; /* for Chrome, Safari */
+    -moz-osx-font-smoothing: grayscale; /* for Firefox */
+    text-rendering: optimizeLegibility;
+}
+
+h1 {
+    font-size: 5em; /* Use relative units for better responsiveness */
+    font-weight: bold;
+    color: #0a0a0a;
+    margin-bottom: 0.5em; /* Add some space below the heading */
+}
+
+p {
+    font-size: 2em; /* Use relative units for better responsiveness */
+    line-height: 1.5;
+    margin-bottom: 1em; /* Add some space below the paragraph */
+}
+
+a {
+    color: #002877;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Add underline on hover to indicate it's a clickable link */
+}
+
+ol {
+    margin-left: 1.5em; /* Indent the ordered list */
+}
+
+.highlighted {
+    text-shadow: 0 0 5px #00e1ffc7;
+}
