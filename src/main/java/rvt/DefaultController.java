@@ -23,4 +23,9 @@ public class DefaultController {
         model.addAttribute("name", name);
         return "hello";
     }
+
+    @GetMapping(value = "/about")
+    String about() {
+        return "about";
+    }
 }
