@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DefaultController {
     
    @GetMapping(value = "/")
-    String index(@RequestParam(name="name", required=false, defaultValue="null") String name, Model model) {
+    String index() {
         return "index";
     }
 
@@ -19,7 +19,7 @@ public class DefaultController {
     }
 
     @GetMapping(value = "/hello")
-    String hello(@RequestParam(name="name", required=false, defaultValue="null") String name, Model model) {
+    String hello(@RequestParam(name="name", required=false, defaultValue="Anonymous") String name, Model model) {
         model.addAttribute("name", name);
         return "hello";
     }

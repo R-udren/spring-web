@@ -10,6 +10,16 @@
     <h1>Spring Bob!</h1>
     <p>Get your student <a href="/student">here</a></p>
     <p>Say hello for some people <a href="/hellos">here</a></p>
+
+    <form action="/hello" method="get">
+        <fieldset>
+            <legend>Enter your information:</legend>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="sussy name">
+        <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+
     <p><a href="/about">About us</a></p>
 </body>
 </html>
