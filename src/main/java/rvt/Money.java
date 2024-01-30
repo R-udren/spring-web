@@ -3,92 +3,72 @@ package rvt;
 public class Money {
 
     private final int euros;
-    private final int cents;
+    private final byte cents;
 
-    public Money(int euros, int cents) {
+    public Money(int euros, byte cents) {
         this.euros = euros;
         this.cents = cents;
     }
+
     public Money(int euros) {
-        this(euros, 0);
+        this(euros, (byte)0);
     }
+
     public Money() {
-        this(0, 0);
+        this(0, (byte)0);
     }
+
     public int euros() {
         return euros;
     }
-    
-    public int cents() {
+
+    public byte cents() {
         return cents;
     }
 
-    public String toString() {
-        String zero = "";
-        if (cents <= 10) {
-            zero = "0";
+    public boolean equals(Object object) {
+        if (object == null || this.getClass() != object.getClass()) {
+            return false;
         }
 
-        return euros + "." + zero + cents + "€";
+        Money compared = (Money) object;
+
+        return this.euros == compared.euros && this.cents == compared.cents;
     }
     
     public Money plus(Money addition) {
-        int a;
-        int b;
-        if (addition.euros() < 0 && addition.cents() >= 0) 
-        {
-            a = cents() - addition.cents();
-            b = euros() + addition.euros() + a / 100;
+        int totalEuros = this.euros + addition.euros;
+        byte totalCents = (byte) (this.cents + addition.cents);
+        return new Money(totalEuros, totalCents);
+    }
+    
+     public Money plus(int additionalEuros, int additionalCents) {
+        int totalEuros = this.euros + additionalEuros;
+        byte totalCents = (byte) (this.cents + additionalCents);
+        return new Money(totalEuros, totalCents);
+    }
 
-        } 
-        else if (euros() < 0 && cents() >= 0)
-        {
-            a = addition.cents() - cents();
-            b = euros() + addition.euros() + a / 100;
+    public Money plus(double addition) {
+        int additionalEuros = (int) addition;
+        byte additionalCents = (byte) ((addition - additionalEuros) * 100);
+        return plus(additionalEuros, additionalCents);
+    }
 
-        }
-        else 
-        {
-            a = cents() + addition.cents();
-            b = euros() + addition.euros() + a / 100;
-        }
-        Money newMoney;
-        
-        if ((b < 0) || (b <= 0 && a <= 0)) 
-        {
-            newMoney = new Money(0, 0);
-        } 
-        else if (a < 0) 
-        {
-            newMoney = new Money(b - 1, 100 + a);
-        }
-        else 
-        {
-            newMoney = new Money(b, a % 100);
-        }
-        
-        return newMoney;
+    public Money plus(int additionalEuros) {
+        return plus(additionalEuros, 0);
+    }
+
+    public Money plus(byte additionalCents) {
+        return plus(0, additionalCents);
     }
 
     public boolean lessThan(Money compared) {
-        return !(euros() > compared.euros() && cents() >= compared.cents());
-
-    }
-
-    public Money minus(Money decreaser) {
-        int a = euros() - decreaser.euros();
-        int b = cents() - decreaser.cents();
-        Money decreasedvalue;
-
-        if ((a <= 0 && b <=0) || (a < 0)) {
-            decreasedvalue = new Money(0, 0);
-        } else if (b <= 0 && a > 0){
-            decreasedvalue = new Money(a - 1, 100 + b);
-        } else {
-            decreasedvalue = new Money(a, b);
+        if (this.euros < compared.euros) {
+            return true;
         }
-
-        
-        return decreasedvalue;
+        if (this.euros == compared.euros && this.cents < compared.cents) {
+            return true;
+        }
+        return false;
     }
 }
