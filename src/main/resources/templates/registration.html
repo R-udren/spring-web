@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            background: radial-gradient(closest-side, #004e92, #000428);
+            background-size: 200% 200%;
+            background-position: 50% 50%;
+            animation: Gradient 12s linear infinite;
+        
+            color: #ddd;
+            font-family: Arial, sans-serif;
+            font-size: 1.2em;
+            display: flex;
+            min-height: 85vh;
+            max-height: 800px;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @keyframes Gradient {
+            0%, 100% {
+                background-position: 25% 50%;
+            }
+            25% {
+                background-position: 50% 75%;
+            }
+            50% {
+                background-position: 75% 50%;
+            }
+            75% {
+                background-position: 50% 25%;
+            }
+        }
+    
+        .container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        h1 {
+            text-align: center;
+            color: #ddd;
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+        }
+    
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ddd;
+        }
+    
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #1a1a1a;
+            color: #ddd;
+            box-sizing: border-box;
+        }
+
+        .form-group input:hover, .form-group select:hover {
+            background-color: #333;
+        }
+    
+        .form-group input[type="submit"] {
+            background-color: #004e92;
+            color: #ddd;
+            cursor: pointer;
+        }
+    
+        .form-group input[type="submit"]:hover {
+            background-color: #00084c;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #1a1a1a;
+            color: #ddd;
+            box-sizing: border-box;
+            appearance: none; /* remove default appearance */
+            -webkit-appearance: none; /* remove default appearance for Chrome and Safari */
+            -moz-appearance: none; /* remove default appearance for Firefox */
+            background: #1a1a1a url('dropdown-arrow.png') no-repeat 95% center; /* add custom dropdown arrow */
+        }
+        
+        .form-group select:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form th:action="@{/registration}" method="post" th:object="${user}">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="sussy name" th.field="*{name}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="example@mail.com" th.field="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" minlength="8" th.field="*{password}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Select Your Role</label>
+                <select id="role" name="role" th.field="*{role}">
+                    <option th:each="r : ${roles}" th:value="${r}" th:text="${r}">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+
+        <p th:if="${error}" style="color: red; text-align: center;">${error}</p>
+    </div>
+</body>
+</html>

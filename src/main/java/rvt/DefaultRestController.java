@@ -9,23 +9,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class DefaultRestController {
+    @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getUser() {
+        User user = new User(1L, "John Doe", "email@mail.com", "password", "Other");
 
-    @RequestMapping(value = "/student", produces = MediaType.APPLICATION_JSON_VALUE)
-    String getAllStudents() {
-        Student student = 
-        new Student("Jānis",
-        "Saulītis",
-        "janis.saulitis@mail.com",
-        "DP2-3");
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            String json = objectMapper.writeValueAsString(student);
-            return json;
+            return mapper.writeValueAsString(user);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return null;
+            return "Error";
         }
     }
 }
